@@ -159,7 +159,10 @@ void queue_wait_until_finished(work_queue_t queue)
       i++)
   {
     pthread_join(*queue->worker_threads[i], NULL);
+    free(queue->worker_threads[i]);
   }
+  // All threads are dead & gone, so no lock needed.
+  queue->worker_count = 0;
 }
 
 int queue_set_worker_count(work_queue_t queue, size_t worker_count)
