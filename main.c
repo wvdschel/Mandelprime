@@ -6,13 +6,9 @@
 #include "mandelbrot.h"
 #include "primesieve.h"
 #include "log.h"
-#include "time.h"
 
 int main(int argc, char** argv)
 {
-  struct timespec epoch = {0};
-  clock_settime(CLOCK_MONOTONIC, &epoch);
-
   vlog("Starting prime sieve");
   primesieve_t sieve = create_primesieve(100000000); // Or use UINT64_MAX
   work_queue_t queue = create_work_queue(6,
